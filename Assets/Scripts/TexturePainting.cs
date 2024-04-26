@@ -17,7 +17,7 @@ public class TexturePainting : MonoBehaviour
    [SerializeField] private Color32 _color;
    [SerializeField] private float _brushSize;
    
-   public bool IsCanDraw { get; set; }
+   private bool IsCanDraw { get; set; } = true;
 
    public Texture2D Texture => _texture2D;
    
