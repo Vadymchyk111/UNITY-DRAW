@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DrawingScript : MonoBehaviour
+public class TexturePainting : MonoBehaviour
 {
    [Header("Main Components")]
    [Range(2,512)]
@@ -17,6 +17,8 @@ public class DrawingScript : MonoBehaviour
    [SerializeField] private Color32 _color;
    [SerializeField] private float _brushSize;
 
+   public Texture2D Texture => _texture2D;
+   
    private void OnEnable()
    {
       _colorPicker.OnChanged += ChangeBrush;
@@ -80,5 +82,22 @@ public class DrawingScript : MonoBehaviour
    {
       _color = color;
       _brushSize = brushSize;
+   }
+
+   public void SetTexture(byte[] bytes)
+   {
+      _texture2D.LoadImage(bytes);
+   }
+
+   public void ClearTexture()
+   {
+      _texture2D = new Texture2D(_textureSize, _textureSize)
+      {
+         wrapMode = _textureWrapMode,
+         filterMode = _filterMode
+      };
+      
+      _material.mainTexture = _texture2D;
+      _texture2D.Apply();
    }
 }
