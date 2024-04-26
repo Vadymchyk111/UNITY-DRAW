@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class DrawingScript : MonoBehaviour
@@ -12,10 +11,21 @@ public class DrawingScript : MonoBehaviour
    [SerializeField] private Material _material;
    [SerializeField] private Camera _camera;
    [SerializeField] private Collider _collider;
+   [SerializeField] private ColorPicker _colorPicker;
 
    [Header("Paint Utility")] 
-   [SerializeField] private Color _color;
+   [SerializeField] private Color32 _color;
    [SerializeField] private float _brushSize;
+
+   private void OnEnable()
+   {
+      _colorPicker.OnChanged += ChangeBrush;
+   }
+
+   private void OnDisable()
+   {
+      _colorPicker.OnChanged -= ChangeBrush;
+   }
 
    private void Start()
    {
@@ -48,7 +58,7 @@ public class DrawingScript : MonoBehaviour
       DrawOnTexture(rayX, rayY, _color);
    }
 
-   private void DrawOnTexture(int x, int y, Color color)
+   private void DrawOnTexture(int x, int y, Color32 color)
    {
       int brushSizeInt = Mathf.FloorToInt(_brushSize);
 
@@ -64,5 +74,11 @@ public class DrawingScript : MonoBehaviour
       }
 
       _texture2D.Apply();
+   }
+
+   private void ChangeBrush(Color32 color, float brushSize)
+   {
+      _color = color;
+      _brushSize = brushSize;
    }
 }
