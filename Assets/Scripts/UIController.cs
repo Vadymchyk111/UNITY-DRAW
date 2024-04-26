@@ -10,7 +10,7 @@ public class UIController : MonoBehaviour
         _uiControllerView.SaveButton.onClick.AddListener(SaveTexture);
         _uiControllerView.LoadButton.onClick.AddListener(LoadTexture);
         _uiControllerView.ClearButton.onClick.AddListener(ClearTexture);
-        _uiControllerView.OnPalleteOpen += _texturePainting.SetCanDraw;
+        _uiControllerView.OnPaletteOpen += _texturePainting.SetCanDraw;
     }
 
     private void OnDisable()
@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour
         _uiControllerView.SaveButton.onClick.RemoveListener(SaveTexture);
         _uiControllerView.LoadButton.onClick.RemoveListener(LoadTexture);
         _uiControllerView.ClearButton.onClick.RemoveListener(ClearTexture);
-        _uiControllerView.OnPalleteOpen -= _texturePainting.SetCanDraw;
+        _uiControllerView.OnPaletteOpen -= _texturePainting.SetCanDraw;
     }
 
     private void SaveTexture()

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UIControllerView : MonoBehaviour
 {
-    public event Action<bool> OnPalleteOpen;
+    public event Action<bool> OnPaletteOpen;
     
     [SerializeField] private Button _colorPaletteButton;
     [SerializeField] private Button _saveButton;
@@ -24,7 +24,7 @@ public class UIControllerView : MonoBehaviour
     {
         IsPaletteOpen = !IsPaletteOpen;
         _palettePanel.SetActive(IsPaletteOpen);
-        OnPalleteOpen?.Invoke(IsPaletteOpen);
+        OnPaletteOpen?.Invoke(IsPaletteOpen);
     }
 
     private void OnEnable()
@@ -33,7 +33,7 @@ public class UIControllerView : MonoBehaviour
         {
             _palettePanel.SetActive(false);
             IsPaletteOpen = false;
-            OnPalleteOpen?.Invoke(false);
+            OnPaletteOpen?.Invoke(false);
         });
         _colorPaletteButton.onClick.AddListener(ActivatePalette);
     }
