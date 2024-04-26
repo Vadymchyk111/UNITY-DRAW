@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIControllerView : MonoBehaviour
 {
+    public event Action<bool> OnPalleteOpen;
+    
     [SerializeField] private Button _colorPaletteButton;
     [SerializeField] private Button _saveButton;
     [SerializeField] private Button _loadButton;
@@ -21,6 +24,7 @@ public class UIControllerView : MonoBehaviour
     {
         IsPaletteOpen = !IsPaletteOpen;
         _palettePanel.SetActive(IsPaletteOpen);
+        OnPalleteOpen?.Invoke(IsPaletteOpen);
     }
 
     private void OnEnable()
@@ -29,6 +33,7 @@ public class UIControllerView : MonoBehaviour
         {
             _palettePanel.SetActive(false);
             IsPaletteOpen = false;
+            OnPalleteOpen?.Invoke(false);
         });
         _colorPaletteButton.onClick.AddListener(ActivatePalette);
     }

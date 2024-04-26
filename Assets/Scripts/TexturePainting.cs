@@ -16,6 +16,8 @@ public class TexturePainting : MonoBehaviour
    [Header("Paint Utility")] 
    [SerializeField] private Color32 _color;
    [SerializeField] private float _brushSize;
+   
+   public bool IsCanDraw { get; set; }
 
    public Texture2D Texture => _texture2D;
    
@@ -43,6 +45,11 @@ public class TexturePainting : MonoBehaviour
 
    private void Update()
    {
+      if (!IsCanDraw)
+      {
+         return;
+      }
+      
       if (!Input.GetMouseButton(0))
       {
          return;
@@ -99,5 +106,10 @@ public class TexturePainting : MonoBehaviour
       
       _material.mainTexture = _texture2D;
       _texture2D.Apply();
+   }
+
+   public void SetCanDraw(bool isPaletteActive)
+   {
+      IsCanDraw = !isPaletteActive;
    }
 }
